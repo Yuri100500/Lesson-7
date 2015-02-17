@@ -28,11 +28,9 @@ public class Main {
                     List<Integer> arrExampleList = new ArrayList<Integer>();
 
                     Utils.getStartTime(); // Taking start time
-                    arrExampleList.add(50);
-                    arrExampleList.add(60);
-                    arrExampleList.add(70);
-                    arrExampleList.add(80);
-                    arrExampleList.add(90);
+                    for (byte counterArrAdd = 0; counterArrAdd <= 4; counterArrAdd++){
+                        arrExampleList.add(50);
+                    }
                     System.out.println("For Arraylist\n" +
                                        "_______________\n" +
                                        "Add elements...\n" +
@@ -55,11 +53,9 @@ public class Main {
 
                     List<Integer> linkedExampleList = new LinkedList<Integer>();
                     Utils.getStartTime();
-                    linkedExampleList.add(50);
-                    linkedExampleList.add(60);
-                    linkedExampleList.add(70);
-                    linkedExampleList.add(80);
-                    linkedExampleList.add(90);
+                    for(byte counterLinkedList = 0; counterLinkedList <= 4; counterLinkedList++){
+                        linkedExampleList.add(50);
+                    }
                     System.out.println("For LinkedList\n" +
                                        "_______________\n" +
                                        "Add elements...\n" +
@@ -91,11 +87,9 @@ public class Main {
 
                     Set<Integer> setExample = new HashSet<Integer>();
                     Utils.getStartTime();
-                    setExample.add(50);
-                    setExample.add(60);
-                    setExample.add(70);
-                    setExample.add(80);
-                    setExample.add(90);
+                    for(byte counterHashSetAdd = 0; counterHashSetAdd <=4; counterHashSetAdd++){
+                        setExample.add(50);
+                    }
                     System.out.println("For HashSet\n" +
                                        "_______________\n" +
                                        "Add elements...\n" +
@@ -119,11 +113,9 @@ public class Main {
 
                     Set<Integer> treeExample = new TreeSet<Integer>();
                     Utils.getStartTime();
-                    treeExample.add(50);
-                    treeExample.add(60);
-                    treeExample.add(70);
-                    treeExample.add(80);
-                    treeExample.add(90);
+                    for(byte counterTreeSetAdd = 0; counterTreeSetAdd <=4; counterTreeSetAdd++){
+                        treeExample.add(50);
+                    }
                     System.out.println("For TreeSet\n" +
                                        "_______________\n" +
                                        "Add elements...\n" +
@@ -159,7 +151,7 @@ public class Main {
                     hashMapExample.put(3, "Third");
                     hashMapExample.put(4, "Fourth");
                     hashMapExample.put(5, "Fifth");
-                    System.out.println("For TreeSet\n" +
+                    System.out.println("For HashMap\n" +
                                        "_______________\n" +
                                        "Add elements...\n" +
                                        "Work time = " + Utils.getAverageTime(startTime));
@@ -172,11 +164,11 @@ public class Main {
                                        averageResultFind = Utils.getAverageTime(startTime);
 
                     Utils.getStartTime();
-                    hashMapExample.remove(0);
                     hashMapExample.remove(1);
                     hashMapExample.remove(2);
                     hashMapExample.remove(3);
                     hashMapExample.remove(4);
+                    hashMapExample.remove(5);
                     System.out.println("Removing all elements...\n" +
                                        "Work time = " + Utils.getAverageTime(startTime));
                                        averageResultRemove = Utils.getAverageTime(startTime);
@@ -199,6 +191,16 @@ public class Main {
 
                     Utils.getStartTime();
                     for(Map.Entry entry: treeMapExample.entrySet());
+                    System.out.println("Finding elements...\n" +
+                            "Work time = " + Utils.getAverageTime(startTime));
+                            averageResultFind = Utils.getAverageTime(startTime);
+
+                    Utils.getStartTime();
+                    treeMapExample.remove(1);
+                    treeMapExample.remove(2);
+                    treeMapExample.remove(3);
+                    treeMapExample.remove(4);
+                    treeMapExample.remove(5);
                     System.out.println("Removing all elements...\n" +
                                        "Work time = " + Utils.getAverageTime(startTime));
                                        averageResultRemove = Utils.getAverageTime(startTime);
