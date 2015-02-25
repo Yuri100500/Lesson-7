@@ -9,27 +9,28 @@ import java.util.List;
  */
 public class Utils {
 
-    public static void searchByName (List<Device> searchValue, String byName) throws ByNameException { //Searching device by entered String
+    public static void searchByAny (List<DeviceRoom> searchValue, String search) throws ByNameException { //Searching device by entered String
         int count = 0;
-        for (Device devices : searchValue){
-            if (byName.equals(devices.getDeviceName())){
+        for (DeviceRoom devices : searchValue){
+            if (search.equals(devices.getDeviceName()) || search.equals(devices.getDeviceRoom())|| search.equals(devices.getDevicePlugIn())){
                 System.out.println(devices.toString());
                 count++;
-            }
+               }
         }
         if(count == 0){  // If ArrayList is empty throw ByName exception
-            throw new ByNameException(byName);
+            throw new ByNameException(search);
         }
     }
 
-    public static int summPower(List<Device> listOfDevices){ // Count total power of plugged devices (Only for devices where devicePlugIn == true)
+    public static int summPower(List<DeviceRoom> listOfDevices){ // Count total power of plugged devices (Only for devices where devicePlugIn == true)
 
         int powerSumm = 0;
 
-        for (Device device : listOfDevices){
-            if(device.getDevicePlugIn()){
-                powerSumm = powerSumm + device.getDevicePower();
+        for (DeviceRoom deviceRoom : listOfDevices){
+            if(deviceRoom.getDevicePlugIn().equalsIgnoreCase("Y") ){
+                powerSumm = powerSumm + deviceRoom.getDevicePower();
             }
         }return powerSumm;
     }
+
 }
