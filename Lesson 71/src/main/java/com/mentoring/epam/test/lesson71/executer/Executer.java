@@ -5,10 +5,7 @@ import com.mentoring.epam.test.lesson71.modules.Device;
 import com.mentoring.epam.test.lesson71.modules.DeviceRoom;
 import com.mentoring.epam.test.lesson71.modules.Utils;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by Iurii_Galias on 1/27/15.
@@ -20,6 +17,7 @@ public class Executer  {
         boolean enter = true;
 
         List<DeviceRoom> deviceList = new ArrayList<DeviceRoom>(); // Creating arraylist
+        Map<String,Object> criteriaMap = new HashMap<String, Object>();
 
         deviceList.add(new DeviceRoom("Smartphone", 3, "Hall", "Y")); //Fill this list by basics objects in the room
         deviceList.add(new DeviceRoom("Oven", 220, "Kitchen", "Y"));
@@ -27,7 +25,10 @@ public class Executer  {
         deviceList.add(new DeviceRoom("Light", 100, "Hall", "N" ));
         deviceList.add(new DeviceRoom("TV", 210, "Bedroom", "N" ));
 
-
+        criteriaMap.put(Utils.NAME,null);
+        criteriaMap.put(Utils.POWER,null);
+        criteriaMap.put(Utils.PLUG,null);
+        criteriaMap.put(Utils.ROOM,null);
 
         while(enter){ // We will use this menu until enter == false
 
@@ -89,16 +90,55 @@ public class Executer  {
                     break;
 
                 case 2: //Finding device by entered name
-                    System.out.println("Enter name:");
-                    String search = new Scanner(System.in).nextLine();
-                    try {
-                        Utils.searchByAny(deviceList, search);
-                        System.out.println("");
-                    }catch (ByNameException e){
-                        System.out.println(e.getMsg() + "\n"); //Custom Exception
-                    }
-                break;
-
+                    boolean entered = true, isCorrect = true;
+                        System.out.println("Enter Power:");
+                        int devicePower = new Scanner(System.in).nextInt();
+                        criteriaMap.put(Utils.POWER,devicePower);
+                        System.out.println("Do you want to add another parameter (Name, Room, or Plugging flag)?");
+                        String flag = new Scanner(System.in).nextLine().toUpperCase();
+                        while(isCorrect) {
+                            if ("Y".equalsIgnoreCase(flag) || "N".equalsIgnoreCase(flag))
+                            {
+                                isCorrect = false;
+                            }
+                            else {
+                                System.out.println("Please enter Y or N");
+                                flag = new Scanner(System.in).nextLine().toUpperCase().substring(0,1);
+                            }
+                            while (entered){
+                                String deviceName = null, deviceRoom = null, devicePlug = null;
+                                System.out.println("Enter another parameter (\"1 - Name\", \"2 - Room\", or \"3 - Plug in\", 4 - Starting search with  selected criteria)");
+                                int criteria = new Scanner(System.in).nextInt();
+                                /*if (deviceName != "" || deviceRoom != "" || devicePlug != ""){
+                                    System.out.println("This parameter was initialized before, please choose another criteria");
+                                }*/
+                                switch (criteria){
+                                    case 1:
+                                        if (deviceName !=null){
+                                            System.out.println("This parameter was initialized before, please choose another criteria\n");
+                                            break;
+                                        }
+                                        System.out.println("Enter name");
+                                        deviceName = new Scanner(System.in).nextLine();
+                                        criteriaMap.put(Utils.NAME,deviceName);
+                                        break;
+                                    case 2:
+                                        System.out.println("Enter room");
+                                        deviceRoom = new Scanner(System.in).nextLine();
+                                        criteriaMap.put(Utils.ROOM,deviceRoom);
+                                        break;
+                                    case 3:
+                                        System.out.println("Enter plug");
+                                        devicePlug = new Scanner(System.in).nextLine();
+                                        criteriaMap.put(Utils.PLUG,devicePlug);
+                                        break;
+                                    case 4:
+                                        entered = false;
+                                        break;
+                                }
+                            }
+                        }
+                    Utils.advancedSearch(criteriaMap,deviceList);
                 case 3: //Displayed all devices in the ArrayList
                     int position = 0;
                   for (Device allPluggedDevices : deviceList){
