@@ -33,7 +33,7 @@ public class Executer  {
         while(enter){ // We will use this menu until enter == false
 
             System.out.println("1 - Add device to the flat\n" +
-                               "2 - Find device by parameter(except power)\n" +
+                               "2 - Find device by any parameter\n" +
                                "3 - Show all  devices in the flat\n" +
                                "4 - Show total power of all devices which are plugged into the network\n" +
                                "5 - Remove device from the flat\n" +
@@ -97,11 +97,14 @@ public class Executer  {
                         System.out.println("Do you want to add another parameter (Name, Room, or Plugging flag)?");
                         String flag = new Scanner(System.in).nextLine().toUpperCase();
                         while(isCorrect) {
-                            if ("Y".equalsIgnoreCase(flag) || "N".equalsIgnoreCase(flag))
+                            if ("Y".equalsIgnoreCase(flag))
                             {
                                 isCorrect = false;
                             }
-                            else {
+                            else if("N".equalsIgnoreCase(flag)) {
+                                isCorrect = false;
+                                entered = false;
+                            }else {
                                 System.out.println("Please enter Y or N");
                                 flag = new Scanner(System.in).nextLine().toUpperCase().substring(0,1);
                             }
@@ -138,7 +141,11 @@ public class Executer  {
                                 }
                             }
                         }
-                    Utils.advancedSearch(criteriaMap,deviceList);
+                    for (DeviceRoom result : Utils.advancedSearch(criteriaMap,deviceList)){
+                        System.out.println(result);
+                    }
+                    System.out.println("\n");
+                    break;
                 case 3: //Displayed all devices in the ArrayList
                     int position = 0;
                   for (Device allPluggedDevices : deviceList){

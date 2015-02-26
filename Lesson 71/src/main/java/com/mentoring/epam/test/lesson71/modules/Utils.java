@@ -3,6 +3,7 @@ package com.mentoring.epam.test.lesson71.modules;
 import com.mentoring.epam.test.lesson71.exception.ByNameException;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
 
@@ -12,18 +13,7 @@ import java.util.Map;
 public class Utils {
     public static final String NAME ="deviceName", POWER = "devicePower", ROOM = "deviceRoom",PLUG = "devicePlug";
 
-    /*public static void searchByAny (List<DeviceRoom> searchValue, String search) throws ByNameException { //Searching device by entered String
-        int count = 0;
-        for (DeviceRoom devices : searchValue){
-            if (search.equals(devices.getDeviceName()) || search.equals(devices.getDeviceRoom())|| search.equals(devices.getDevicePlugIn())){
-                System.out.println(devices.toString());
-                count++;
-               }
-        }
-        if(count == 0){  // If ArrayList is empty throw ByName exception
-            throw new ByNameException(search);
-        }
-    }*/
+
     public static int summPower(List<DeviceRoom> listOfDevices){ // Count total power of plugged devices (Only for devices where devicePlugIn == true)
 
         int powerSumm = 0;
@@ -35,8 +25,8 @@ public class Utils {
         }return powerSumm;
     }
 
-    public static void advancedSearch (Map<String,Object> params, List<DeviceRoom> listOfDevices){
-        List<DeviceRoom> advancedSearchResultList = new ArrayList<DeviceRoom>();
+    public static ArrayList<DeviceRoom> advancedSearch (Map<String,Object> params, List<DeviceRoom> listOfDevices) throws InputMismatchException{
+        ArrayList<DeviceRoom> advancedSearchResultList = new ArrayList<DeviceRoom>();
         Object searchCriteriaDeviceName = params.get(NAME);
         Object searchCriteriaDevicePower =(Integer) params.get(POWER);
         Object searchCriteriaDeviceRoom = params.get(ROOM);
@@ -48,11 +38,11 @@ public class Utils {
             advancedSearchResultList.addAll(searchByPower(listOfDevices,(Integer)searchCriteriaDevicePower));
         }
         if(searchCriteriaDeviceRoom != null){
-            advancedSearchResultList.addAll(searchByName(listOfDevices, searchCriteriaDeviceRoom.toString()));
+            advancedSearchResultList.addAll(searchByRoom(listOfDevices, searchCriteriaDeviceRoom.toString()));
         }
         if(searchCriteriaDevicePlugIn != null){
-            advancedSearchResultList.addAll(searchByName(listOfDevices, searchCriteriaDevicePlugIn.toString()));
-        }
+            advancedSearchResultList.addAll(searchByPlugIn(listOfDevices, searchCriteriaDevicePlugIn.toString()));
+        }return advancedSearchResultList;
     }
 
     private static ArrayList<DeviceRoom> searchByName(List<DeviceRoom> listOfDevices, String name){
@@ -93,6 +83,10 @@ public class Utils {
                 listOfResultsByPlugIn.add(currentDeviceFromListOfDevices);
             }
         }return listOfResultsByPlugIn;
+    }
+
+    public static void clearResultList(ArrayList<DeviceRoom> listOfResult){
+        listOfResult.removeAll(listOfResult);
     }
 
 }
