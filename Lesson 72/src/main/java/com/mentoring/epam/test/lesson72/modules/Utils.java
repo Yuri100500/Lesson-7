@@ -28,16 +28,25 @@ public class Utils {
     }
     public static void searchLinkedList(List<Integer> linkedSearch){
         for(Integer integer : linkedSearch){
+            if (integer.equals(5445454)){
+                System.out.println(integer);
+            }
         }
     }
 
     public static void searchHashSet(Set<Integer> hashSearch){
         for(Integer integer : hashSearch){
+            if (integer.equals(5445454)){
+                System.out.println(integer);
+            }
         }
     }
 
     public static void searchTreeSet(Set<Integer> treeSearch){
         for(Integer integer : treeSearch){
+            if (integer.equals(5445454)){
+                System.out.println(integer);
+            }
         }
     }
 }
