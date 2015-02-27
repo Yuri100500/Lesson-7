@@ -2,10 +2,7 @@ package com.mentoring.epam.test.lesson71.modules;
 
 import com.mentoring.epam.test.lesson71.exception.ByNameException;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Iurii_Galias on 1/27/15.
@@ -25,8 +22,8 @@ public class Utils {
         }return powerSumm;
     }
 
-    public static ArrayList<DeviceRoom> advancedSearch (Map<String,Object> params, List<DeviceRoom> listOfDevices) throws InputMismatchException{
-        ArrayList<DeviceRoom> advancedSearchResultList = new ArrayList<DeviceRoom>();
+    public static HashSet<DeviceRoom> advancedSearch (Map<String,Object> params, List<DeviceRoom> listOfDevices) throws InputMismatchException{
+        HashSet<DeviceRoom> advancedSearchResultList = new HashSet<DeviceRoom>();
         Object searchCriteriaDeviceName = params.get(NAME);
         Object searchCriteriaDevicePower =(Integer) params.get(POWER);
         Object searchCriteriaDeviceRoom = params.get(ROOM);
@@ -84,9 +81,4 @@ public class Utils {
             }
         }return listOfResultsByPlugIn;
     }
-
-    public static void clearResultList(ArrayList<DeviceRoom> listOfResult){
-        listOfResult.removeAll(listOfResult);
-    }
-
 }

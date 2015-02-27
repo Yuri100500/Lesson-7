@@ -20,6 +20,9 @@ public class Utils {
 
     public static void searchArrayList(List<Integer> arraySearch){
         for(Integer integer : arraySearch){
+            if (integer.equals(5445454)){
+                System.out.println(integer);
+            }
             //System.out.println(integer);
         }
     }

@@ -12,7 +12,7 @@ public class Main {
 
         boolean entered = true; // We will use this menu until enter == false
         long startTime = 0; // inintializing variable which help me count work time
-
+        Random rand = new Random();
         while(entered){
             System.out.println("Choose comparing method:\n"+
                                "1 - ArrayList vs LinkedList\n" +
@@ -28,9 +28,11 @@ public class Main {
                     List<Integer> arrExampleList = new ArrayList<Integer>();
 
                     Utils.getStartTime(); // Taking start time
-                    for (byte counterArrAdd = 0; counterArrAdd <= 4; counterArrAdd++){
-                        arrExampleList.add(50);
-                    }
+                    for (int counterArrAdd = 0; counterArrAdd <= 100; counterArrAdd++){
+                        arrExampleList.add(rand.nextInt());
+                    }Utils.getAverageTime(startTime);
+
+
                     System.out.println("For Arraylist\n" +
                                        "_______________\n" +
                                        "Add elements...\n" +

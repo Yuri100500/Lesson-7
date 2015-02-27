@@ -56,14 +56,14 @@ public class Executer  {
                         System.out.println("Enter device name (String required): ");
                         String deviceName = new Scanner(System.in).nextLine();
                         System.out.println("Enter device power (Integer required): ");
-                        int devicePower = new Scanner(System.in).nextInt();
+                        Integer devicePower = new Scanner(System.in).nextInt();
                         while(isCorrect) {
                             if (devicePower > 0 )
                             {
                                 isCorrect = false;
                             }
                             else {
-                                System.out.println("Please enter Power > 0");
+                                System.out.println("Please type only Integer with Power > 0");
                                 devicePower = new Scanner(System.in).nextInt();
                             }
                         }
@@ -91,6 +91,7 @@ public class Executer  {
 
                 case 2: //Finding device by entered name
                     boolean entered = true, isCorrect = true;
+                    String deviceName = null, deviceRoom = null, devicePlug = null;
                         System.out.println("Enter Power:");
                         int devicePower = new Scanner(System.in).nextInt();
                         criteriaMap.put(Utils.POWER,devicePower);
@@ -109,12 +110,8 @@ public class Executer  {
                                 flag = new Scanner(System.in).nextLine().toUpperCase().substring(0,1);
                             }
                             while (entered){
-                                String deviceName = null, deviceRoom = null, devicePlug = null;
                                 System.out.println("Enter another parameter (\"1 - Name\", \"2 - Room\", or \"3 - Plug in\", 4 - Starting search with  selected criteria)");
                                 int criteria = new Scanner(System.in).nextInt();
-                                /*if (deviceName != "" || deviceRoom != "" || devicePlug != ""){
-                                    System.out.println("This parameter was initialized before, please choose another criteria");
-                                }*/
                                 switch (criteria){
                                     case 1:
                                         if (deviceName !=null){
@@ -126,11 +123,19 @@ public class Executer  {
                                         criteriaMap.put(Utils.NAME,deviceName);
                                         break;
                                     case 2:
+                                        if (deviceRoom !=null){
+                                            System.out.println("This parameter was initialized before, please choose another criteria\n");
+                                            break;
+                                        }
                                         System.out.println("Enter room");
                                         deviceRoom = new Scanner(System.in).nextLine();
                                         criteriaMap.put(Utils.ROOM,deviceRoom);
                                         break;
                                     case 3:
+                                        if (devicePlug !=null){
+                                            System.out.println("This parameter was initialized before, please choose another criteria\n");
+                                            break;
+                                        }
                                         System.out.println("Enter plug");
                                         devicePlug = new Scanner(System.in).nextLine();
                                         criteriaMap.put(Utils.PLUG,devicePlug);
@@ -143,6 +148,9 @@ public class Executer  {
                         }
                     for (DeviceRoom result : Utils.advancedSearch(criteriaMap,deviceList)){
                         System.out.println(result);
+                        if(!criteriaMap.isEmpty()){
+                            criteriaMap.clear();
+                        }
                     }
                     System.out.println("\n");
                     break;
